@@ -38,6 +38,7 @@ def load_data_tab():
         dcc.Dropdown(
             id="dropdown-prompt",
             placeholder="Select prompt",
+            clearable=False,
         ),
         html.Br(),
         dbc.Textarea(
@@ -65,6 +66,7 @@ def load_data_tab():
             id="dropdown-model",
             placeholder="Select model",
             value="gpt-3.5-turbo",
+            clearable=False,
         ),
         html.Br(),
         html.P("Max number tokens", className="text-dash-center"),

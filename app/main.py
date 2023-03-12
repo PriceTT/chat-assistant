@@ -92,7 +92,7 @@ def populate_dropdown_on_load(url, prompt_value):
 
         return prompt, prompt_value, prompt_text, model_options
 
-    if "dropdown-prompt" in changed_id:
+    if "dropdown-prompt" in changed_id and prompt_value:
         prompt_text = df[df.act == prompt_value].prompt.values[0]
 
         return dash.no_update, dash.no_update, prompt_text, dash.no_update
