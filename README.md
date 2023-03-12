@@ -1,13 +1,14 @@
 # Chat Assistant
 Simple Dash interface for the ChatGPT API.  
 Disclaimer: This app was created to to explore OpenAI API and is an unofficial project intended for personal learning and research purposes.  
+
 ## Current Features
 * Runs locally
 * [OpenAI won't use data submitted over the API for training and will only retain the data for 30 days](https://platform.openai.com/docs/guides/chat/faq)
 
 ![Alt text](/screenshots/app_img.png?raw=true)
 
-### TODO
+## TODO
 
 * Error handling
 * Saving of conversations locally
@@ -16,9 +17,14 @@ Disclaimer: This app was created to to explore OpenAI API and is an unofficial p
 
 ## Running locally
 
+### Generate OpenAI API Key
+Go to https://platform.openai.com/account/api-keys and click "Create new secret key" and record the key for later.
+Add the key in app/config called .env (see .env.example)
+
+### Deploy app
 These are the steps to get started with the app:
-1. Clone the repository.
-2. Create the virtual environment using conda. The basic commads are as follows: 
+1. Clone the repository `git clone git@github.com:PriceTT/chat-assistant.git`.
+2. Create the virtual environment using conda and poetry. The basic commads are as follows: 
     * Navigate to project folder and run the command below to the create conda environment which reads the environment.yml file.  
     ``` conda env create ```  
     * Activate the virtual environment  with
@@ -31,16 +37,12 @@ These are the steps to get started with the app:
    ``` conda env remove --name chat-env ```
    * The interpreter path can be found by tying  ```which python```
 
-3. Once the environment is activated you can run the app by navigating to the **app** folder and run the command ```python main.py``` . If everything is fine you should see that flask is starting up and that you can request the welcome page on the specified port on localhost.  
+3. Once the environment is activated you can run the app by navigating to the **app** folder and run the command ```python main.py```.  
+If everything is fine you should see the app starting up and you can see the page on the specified port on localhost.  
 
 4. The user could then edit predefined [prompts](https://github.com/f/awesome-chatgpt-prompts), and change model parameters before executing.
 ![demo](screenshots/app.gif)
 
-
-### Generate OpenAI API Key
-
-Go to https://platform.openai.com/account/api-keys and click "Create new secret key" and record the key for later.
-Add the key in app/config called .env (see .env.example)
 
 ## Acknowledgments
 This project takes inspiration from:  
