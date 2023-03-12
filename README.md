@@ -12,6 +12,7 @@ Disclaimer: This app was created to to explore OpenAI API and is an unofficial p
 * Error handling
 * Saving of conversations locally
 * Switching between gpt-3.5-turbo and other models during a conversation.
+* Get clipboard to work for bot response
 
 ## Running locally
 
@@ -31,6 +32,9 @@ These are the steps to get started with the app:
    * The interpreter path can be found by tying  ```which python```
 
 3. Once the environment is activated you can run the app by navigating to the **app** folder and run the command ```python main.py``` . If everything is fine you should see that flask is starting up and that you can request the welcome page on the specified port on localhost.  
+
+4. The user could then edit predefined [prompts](https://github.com/f/awesome-chatgpt-prompts), and change model parameters before executing.
+![demo](screenshots/app.gif)
 
 
 ### Generate OpenAI API Key
