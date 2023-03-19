@@ -94,11 +94,17 @@ def load_data_tab():
             outline=True,
             color="secondary",
             className="button-dash",
-            id="button-save-promt",
+            id="button-save-prompt",
         ),
         dbc.Tooltip(
-            "Not yet implemented",
-            target="button-save-promt",
+            "Save Chat",
+            target="button-save-prompt",
+        ),
+        dbc.Alert(
+            id="save-alert",
+            is_open=True,
+            dismissable=True,
+            duration=5000,
         ),
     ]
 

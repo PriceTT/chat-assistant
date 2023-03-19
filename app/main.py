@@ -2,6 +2,7 @@ import os
 import logging
 import binascii
 from textwrap import dedent
+import json
 
 import flask
 import dash
@@ -10,6 +11,7 @@ from dash import Dash, html, dcc, Input, Output, State
 from dash.exceptions import PreventUpdate
 import openai
 import pandas as pd
+import datetime as dt
 
 
 from layout_files.layout import Navbar, Body
@@ -36,6 +38,15 @@ APP_NAME = app.config["APP_NAME"]
 USER_IMG = app.config["USER_IMG"]
 AI_IMG = app.config["AI_IMG"]
 logger.info(f"Loading {APP_NAME}")
+DB_PATH = "./data/chat.db"
+
+try:
+    # Check if database exists and create if not
+    if not os.path.exists(DB_PATH):
+        ui.create_chat_info_table()
+        logger.info("Database created")
+except Exception as e:
+    logger.error(e)
 
 # Authentication
 app.config.from_pyfile("config/.env")
@@ -197,6 +208,33 @@ def run_chatbot(
         chat_history += f"{model_output}<split>"
 
     return chat_history, None
+
+
+@dash_app.callback(
+    [Output("save-alert", "is_open"), Output("save-alert", "children"), Output("save-alert", "color")],
+    [Input("button-save-prompt", "n_clicks")],
+    [
+        State("store-conversation", "data"),
+        State("textarea-prompt", "value"),
+        State("dropdown-model", "value"),
+        State("input-tokens", "value"),
+        State("input-temp", "value"),
+    ],
+)
+def save_chat_info_to_database(n_clicks, chat_history, tone, model, tokens, temp):
+    if chat_history is None or chat_history == "":
+        raise PreventUpdate
+
+    # Set title as the current date and time
+    title = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    try:
+        ui.add_row_chat_info(title, model, tone, json.dumps(chat_history), DB_PATH)
+        logger.info(f"Saved chat history to database")
+        return True, "Chat history saved to database", "success"
+    except Exception as e:
+        logger.error(f"Error saving chat history to database: {e}")
+        return True, f"Error: {e}", "danger"
 
 
 #### Start the Dash app
